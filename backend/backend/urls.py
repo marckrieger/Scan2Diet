@@ -16,13 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from rest_framework import routers
-from scan_receipt import views
+from auth.api.views import user_login, user_logout, get_csrf_token
+from scan_receipt.api.views import upload_receipt
+# from rest_framework import routers
+# from scan_receipt import views
 
-router = routers.DefaultRouter()
-router.register(r'scan_receipts', views.ReceiptView, 'scan_receipt')
+# router = routers.DefaultRouter()
+# router.register(r'scan_receipts', views.ReceiptView, 'scan_receipt')
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('api/', include(router.urls)),
+    # path('api/', include(router.urls)),
+    path('api/user_login/', user_login, name='user_login'),
+    path('api/user_logout/', user_logout, name='user_logout'),
+    path('api/get_csrf_token/', get_csrf_token, name='get_csrf_token'),
+    path('api/upload_receipt/', upload_receipt, name='upload_receipt'),
 ]

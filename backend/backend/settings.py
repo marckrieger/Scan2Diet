@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-%(rc+kju7^93n5$z+_(p1ch2ymo^)96ti2@rkunyct@ijk1x@l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.178.21',
+    'localhost',
+]
 
 
 # Application definition
@@ -39,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'rest_framework_simplejwt',
     'scan_receipt',
     'retrieve_products',
 ]
@@ -46,8 +50,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -127,6 +131,30 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ORIGIN_WHITELIST = [
-     'http://localhost:3000'
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:3000',
+#     'http://192.168.178.21:3000',
+# ]
+
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://localhost:3000',
+#     'http://192.168.178.21:3000',
+# ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://192.168.178.21:3000",
+    "http://192.168.178.21:8081",
 ]
+
+# CORS_ALLOW_ALL_ORIGINS = True
+
+# CSRF_COOKIE_SAMESITE = 'None'
+# CORS_ALLOW_CREDENTIALS = True
+# CSRF_COOKIE_SECURE = False
