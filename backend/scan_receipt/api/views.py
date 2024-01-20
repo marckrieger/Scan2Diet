@@ -9,6 +9,8 @@ from ..models import ReceiptImage
 from django.shortcuts import HttpResponse
 import datetime
 from django.http import JsonResponse
+import piexif
+from PIL import Image
 
 @csrf_exempt
 @login_required
@@ -19,6 +21,8 @@ def upload_receipt(request):
             receipt_image = request.FILES['receipt_image']
             date = datetime.datetime.now()
 
+            # Rename image, remove exif
+
             ReceiptImage(receipt_image=receipt_image, date=date).save()
 
             return JsonResponse({'message': 'File uploaded successfully'})
@@ -26,13 +30,3 @@ def upload_receipt(request):
             return JsonResponse({'error': 'No file received'}, status=400)
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=405)
-
-
-# @csrf_exempt
-# def upload_receipt(request):
-#     receipt_image = request.receipt_image
-#     date = datetime.datetime.now()
-
-#     ReceiptImage(receipt_image=receipt_image, date=date).save()
-
-#     return HttpResponse("Upload successfull!")
