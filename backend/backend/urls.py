@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import include, path
 from auth.api.views import user_login, user_logout, get_csrf_token
 from scan_receipt.api.views import upload_receipt
+from django.conf.urls.static import static
+from django.conf import settings
 # from rest_framework import routers
 # from scan_receipt import views
 
@@ -31,4 +33,4 @@ urlpatterns = [
     path('api/user_logout/', user_logout, name='user_logout'),
     path('api/get_csrf_token/', get_csrf_token, name='get_csrf_token'),
     path('api/upload_receipt/', upload_receipt, name='upload_receipt'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

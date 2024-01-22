@@ -1,36 +1,57 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import LoginPage from './components/LoginPage';
-// import HomePage from './components/HomePage';
+import { StyleSheet, Image, View } from 'react-native';
+import { configureFonts, PaperProvider, Text, TextInput, DefaultTheme, Button } from 'react-native-paper';
+import LoginPage from './src/components/LoginPage'
+import LandingPage from './src/components/LandingPage'
+import { useFonts } from "expo-font";
 
-export default function App() {
+const App = () => {
 
-  const [userIsLoggedIn, setUserIsLoggedIn] = useState(false);
+  const [fontsLoaded, fontError] = useFonts({
+    'Outfit-Bold': require('./assets/fonts/Outfit-Bold.ttf'),
+    'Outfit-Regular': require('./assets/fonts/Outfit-Regular.ttf'),
+    'Outfit-Light': require('./assets/fonts/Outfit-Light.ttf'),
+  });
 
-  // axios.get('http://192.168.178.21:8000/api/get_csrf_token/')
-  //   .then(response => {
-  //       const csrfToken = response.data.csrfToken;
-  //       axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
-  //   })
-  //   .catch(error => {
-  //       console.error('Error fetching CSRF token: ', error);
-  //   })
+  if (!fontsLoaded) {
+    return (
+      <View>Loading...</View>
+    );
+  };
 
+  const fontConfig = {
+    "default": {
+      "fontFamily": "Outfit-Regular",
+    },
+  };
+
+  const theme = {
+    ...DefaultTheme,
+    version: 3,
+    mode: 'adaptive',
+    colors: {
+      ...DefaultTheme.colors,
+      primary: '#4E7A6A'
+    },
+    fonts: configureFonts({config: fontConfig }),
+  };
 
   return (
-    <View>
-      <LoginPage onLogin={() => setUserIsLoggedIn(true)} />
-    </View>
+    <PaperProvider theme={theme}>
+      <LandingPage />
+      <StatusBar style="auto" />
+    </PaperProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+// });

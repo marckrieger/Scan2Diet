@@ -21,10 +21,21 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.marckrieger.receipt2health"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-font",
+      {
+        "fonts": [
+          "./assets/fonts/Outfit-Bold.ttf",
+          "./assets/fonts/Outfit-Regular.ttf",
+          "./assets/fonts/Outfit-Light.ttf"
+        ]
+      }
+    ]
   }
 }
