@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
-import { Image, View, StyleSheet } from 'react-native';
+import { useColorScheme, Image, View, StyleSheet } from 'react-native';
 import { useTheme, Text, Button } from 'react-native-paper';
 
-const LandingPage = () => {
+const LandingPage = ({navigation}) => {
 
     const theme = useTheme();
 
+    const colorScheme = useColorScheme();
+    const logoSource =
+        colorScheme === 'dark'
+            ? 'http://192.168.178.21:8000/static/img/logo_dark.png'
+            : 'http://192.168.178.21:8000/static/img/logo_light.png';
+
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {backgroundColor: theme.colors.elevation.level3}]}>
             <Image
                 style={styles.logo}
-                source={{ uri: 'http://192.168.178.21:8000/static/img/logo.png' }}
+                source={{uri: logoSource}}
             />
-            <Text style={[styles.header, { color: theme.colors.primary }]}>Receipt2Health</Text>
-            <Text style={styles.subheader}>Track your nutritional values by scanning your grocery receipts.</Text>
-            <Button style={styles.button} mode="contained" onPress={() => console.log('Pressed')}>
+            <Text variant='headlineLarge' style={[styles.header, { color: theme.colors.primary }]}>Scan2Diet</Text>
+            <Text variant='titleMedium' style={styles.subheader}>Track your nutritional values by scanning your grocery receipts.</Text>
+            <Button uppercase='true' labelStyle={styles.buttonLabel} style={styles.button} mode="contained" onPress={() => navigation.navigate('LoginPage')}>
                 Login
             </Button>
-            <Button style={[styles.button, {variant: 'labelLarge'}]} mode="outlined" onPress={() => console.log('Pressed')}>
+            <Button uppercase='true' labelStyle={styles.buttonLabel} style={[styles.button, {backgroundColor: theme.colors.background}]} mode="outlined" onPress={() => navigation.navigate('SignupPage')}>
                 Sign up
             </Button>
         </View>
@@ -26,14 +32,11 @@ const LandingPage = () => {
 
 const styles = StyleSheet.create({
     container: {
-        display: 'flex',
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        // backgroundColor: 'rgb(240, 255, 240)',
         gap: 25,
-        padding: 30,
+        padding: 20,
     },
     header: {
         textAlign: 'center',
@@ -47,6 +50,12 @@ const styles = StyleSheet.create({
     },
     button: {
         width: '100%',
+        borderRadius: 20,
+        height: 60,
+        justifyContent: 'center',
+    },
+    buttonLabel: {
+        fontSize: 16,
     },
 })
 

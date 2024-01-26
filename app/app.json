@@ -22,20 +22,28 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.marckrieger.receipt2health"
+      "package": "com.marckrieger.scan2diet"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-font",
-      {
-        "fonts": [
-          "./assets/fonts/Outfit-Bold.ttf",
-          "./assets/fonts/Outfit-Regular.ttf",
-          "./assets/fonts/Outfit-Light.ttf"
-        ]
-      }
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Outfit-Bold.ttf",
+            "./assets/fonts/Outfit-Regular.ttf",
+            "./assets/fonts/Outfit-Light.ttf"
+          ]
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
+        }
+      ]
     ]
   }
 }
