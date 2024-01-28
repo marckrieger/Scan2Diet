@@ -38,6 +38,7 @@ const AppPage = ({ navigation }) => {
             />
             <Tab.Screen
                 name="scan"
+                navigation={navigation}
                 component={ScanPage}
                 title="Scan"
                 options={{

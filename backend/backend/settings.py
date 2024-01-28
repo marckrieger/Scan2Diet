@@ -42,9 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'scan_receipt',
     'retrieve_products',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -108,7 +110,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -135,20 +136,13 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS_ORIGIN_WHITELIST = [
-#     'http://localhost:3000',
-#     'http://192.168.178.21:3000',
-# ]
-
-# CSRF_TRUSTED_ORIGINS = [
-#     'http://localhost:3000',
-#     'http://192.168.178.21:3000',
-# ]
-
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
 }
 
 CORS_ALLOWED_ORIGINS = [
@@ -156,9 +150,3 @@ CORS_ALLOWED_ORIGINS = [
     "http://192.168.178.21:3000",
     "http://192.168.178.21:8081",
 ]
-
-# CORS_ALLOW_ALL_ORIGINS = True
-
-# CSRF_COOKIE_SAMESITE = 'None'
-# CORS_ALLOW_CREDENTIALS = True
-# CSRF_COOKIE_SECURE = False

@@ -1,11 +1,37 @@
 import React, { useState } from 'react';
 import { useColorScheme, Image, View, StyleSheet } from 'react-native';
 import { useTheme, Text, TextInput, Button } from 'react-native-paper';
+import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 
 const LoginPage = ({ navigation }) => {
 
-    const [email, setEmail] = React.useState("");
+    const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
+
+    async function authenticate(username, password) {
+
+        try {
+            const loginResponse = await axios.post('http://192.168.178.21:8000/api/user_login/', {
+                username,
+                password,
+            });
+
+            console.log('Response: ' + loginResponse.data);
+
+            const tokenResponse = await axios.post('http://192.168.178.21:8000/api/obtain_token/', {
+                username,
+                password,
+            });
+
+            await SecureStore.setItemAsync('token', tokenResponse.data.token);
+
+            navigation.reset({ index: 0, routes: [{ name: 'AppPage' }], });
+        } catch (error) {
+                console.log(error.message);
+        }
+    }
+
     const theme = useTheme();
 
     const colorScheme = useColorScheme();
@@ -25,10 +51,9 @@ const LoginPage = ({ navigation }) => {
                 style={styles.input}
                 outlineStyle={{ borderRadius: 20 }}
                 mode='outlined'
-                placeholder='Email'
-                value={email}
-                onChangeText={email => setEmail(email)}
-                keyboardType='email-address'
+                placeholder='Username'
+                value={username}
+                onChangeText={username => setUsername(username)}
                 autoCapitalize='none'
             />
             <TextInput
@@ -44,7 +69,7 @@ const LoginPage = ({ navigation }) => {
             <Text style={{ textAlign: 'right', width: '100%' }}>
                 Forgot your password?
             </Text>
-            <Button uppercase='true' labelStyle={styles.buttonLabel} style={styles.button} mode="contained" onPress={() => navigation.navigate('AppPage')}>
+            <Button uppercase='true' labelStyle={styles.buttonLabel} style={styles.button} mode="contained" onPress={()=>authenticate(username, password)}>
                 Login
             </Button>
             <Text>

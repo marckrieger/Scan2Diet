@@ -1,25 +1,65 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, TouchableHighlight } from 'react-native';
-import { useTheme, Text, SegmentedButtons, Button, IconButton, TouchableRipple } from 'react-native-paper';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, StyleSheet, TouchableHighlight, Animated } from 'react-native';
+import { useTheme, Text, SegmentedButtons, Button, IconButton, TouchableRipple, Snackbar } from 'react-native-paper';
 import { Camera, CameraType } from 'expo-camera';
 import { useIsFocused } from '@react-navigation/native';
 import Header from './Header';
+import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 
 const ScanPage = ({ navigation }) => {
 
+    const theme = useTheme();
+
     const isFocused = useIsFocused();
 
-    const [type, setType] = useState(CameraType.back);
     const [permission, requestPermission] = Camera.useCameraPermissions();
 
     const defaultScanMode = 'receipt';
     const [value, setValue] = React.useState(defaultScanMode);
 
-    function takePicture() {
-        console.log('takePicture');
-    }
+    const [shutterColor, setShutterColor] = React.useState(theme.colors.secondary);
+    const [disabled, setDisabled] = React.useState(false);
 
-    const theme = useTheme();
+    const cameraRef = useRef(null);
+
+    const [visible, setVisible] = React.useState(false);
+    const onToggleSnackBar = () => setVisible(!visible);
+    const onDismissSnackBar = () => setVisible(false);
+
+    const takePicture = async () => {
+        setShutterColor('transparent');
+        setDisabled(true);
+        const token = await SecureStore.getItemAsync('token');
+        if (cameraRef.current) {
+            const options = { quality: 0.8 };
+            const data = await cameraRef.current.takePictureAsync(options);
+
+            let formData = new FormData();
+            formData.append('image', {
+                name: 'photo.jpg',
+                type: 'image/jpeg',
+                uri: data.uri,
+            });
+            formData.append('scan_mode', value);
+
+            try {
+                const response = await axios.post('http://192.168.178.21:8000/api/upload/', formData, {
+                    headers: {
+                        Authorization: `Token ${token}`,
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+
+                onToggleSnackBar();
+                setShutterColor(theme.colors.secondary);
+                setDisabled(false);
+            } catch (error) {
+                console.error('Error uploading file:', error);
+                // Handle failure, e.g., show an error message to the user
+            }
+        }
+    };
 
     if (!permission) {
         // Camera permissions are still loading
@@ -43,11 +83,11 @@ const ScanPage = ({ navigation }) => {
 
     return (
         <View style={{ flex: 1 }}>
-            <Header title={headerTitle} />
+            <Header title={headerTitle} navigation={navigation} />
             <View style={styles.container}>
                 {isFocused && (
                     <View style={{ borderRadius: 20, overflow: 'hidden', }}>
-                        <Camera zoom={0.25} style={[styles.camera,]} type={type}>
+                        <Camera ref={cameraRef} zoom={0.25} style={[styles.camera,]}>
                         </Camera>
                     </View>
 
@@ -72,12 +112,24 @@ const ScanPage = ({ navigation }) => {
                         ]}
                     />
                     <View style={{ alignSelf: 'center', backgroundColor: 'transparent', borderColor: theme.colors.secondary, borderWidth: 5, width: 85, height: 85, borderRadius: 100, padding: 6, }}>
-                        <TouchableHighlight activeOpacity={0.9} underlayColor='transparent' onPress={takePicture} style={{ backgroundColor: theme.colors.secondary, flex: 1, borderRadius: 100, overflow: 'hidden', }}>
+                        <TouchableHighlight activeOpacity={0.9} underlayColor='transparent' disabled={disabled} onPress={takePicture} style={{ backgroundColor: shutterColor, flex: 1, borderRadius: 100, overflow: 'hidden', }}>
                             <View></View>
                         </TouchableHighlight>
                     </View>
                 </View>
             </View>
+            <Snackbar
+                visible={visible}
+                onDismiss={onDismissSnackBar}
+                action={{
+                    label: 'View',
+                    onPress: () => {
+                        navigation.navigate('history');
+                    },
+                }}
+            >
+                Upload successful!
+            </Snackbar>
         </View>
     );
 }

@@ -10,6 +10,7 @@ import AppPage from './src/components/AppPage';
 import { useFonts } from "expo-font";
 import { NavigationContainer, DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationDefaultTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import * as SecureStore from 'expo-secure-store';
 
 const Stack = createNativeStackNavigator();
 
@@ -186,17 +187,23 @@ const App = () => {
         fonts: configureFonts({ config: fontConfig }),
       };
 
-  const initialRouteName = 'AppPage';
+  function getInitialRouteName() {
+    const token = SecureStore.getItem('token');
+    console.log(token);
+    return token===undefined ? 'LandingPage' : 'AppPage';
+  }
+
+  const initialRouteName = getInitialRouteName();
 
   return (
     <PaperProvider theme={theme}>
-      <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
-        <NavigationContainer theme={theme}>
+      <View style={{ flex: 1, backgroundColor: theme.colors.elevation.level3 }}>
+        <NavigationContainer>
           <Stack.Navigator initialRouteName={initialRouteName} screenOptions={{ header: (props) => <CustomAppbar {...props} />, }}>
-            <Stack.Screen name="LandingPage" component={LandingPage} options={{ title: '' }} />
-            <Stack.Screen name="LoginPage" component={LoginPage} options={{ title: '' }} />
-            <Stack.Screen name="SignupPage" component={SignupPage} options={{ title: '' }} />
-            <Stack.Screen name="AppPage" component={AppPage} options={{ title: '' }} />
+            <Stack.Screen name="LandingPage" component={LandingPage} />
+            <Stack.Screen name="LoginPage" component={LoginPage} />
+            <Stack.Screen name="SignupPage" component={SignupPage} />
+            <Stack.Screen name="AppPage" component={AppPage} />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

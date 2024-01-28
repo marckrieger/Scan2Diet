@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { useColorScheme, Image, View, StyleSheet } from 'react-native';
+import { useColorScheme, Image, View, StyleSheet, ScrollView } from 'react-native';
 import { useTheme, Text, TextInput, Button } from 'react-native-paper';
+import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 
-const LoginPage = ({navigation}) => {
+const SignupPage = ({ navigation }) => {
 
     const [first_name, setFirstName] = React.useState("");
     const [last_name, setLastName] = React.useState("");
+    const [username, setUsername] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const theme = useTheme();
@@ -15,57 +18,108 @@ const LoginPage = ({navigation}) => {
         colorScheme === 'dark'
             ? 'http://192.168.178.21:8000/static/img/logo_dark.png'
             : 'http://192.168.178.21:8000/static/img/logo_light.png';
-    
+
+
+    function authenticate(username, password) {
+        axios.post('http://192.168.178.21:8000/api/user_login/', {
+            username: username,
+            password: password,
+        })
+            .then((response) => {
+                console.log(response);
+                axios.post('http://192.168.178.21:8000/api/obtain_token/', {
+                    username: username,
+                    password: password,
+                })
+                    .then((response) => {
+                        SecureStore.setItemAsync('token', response.data.token);
+                    }, (error) => {
+                        console.log(error);
+                    });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    function register() {
+        axios.post('http://192.168.178.21:8000/api/user_register/', {
+            first_name: first_name,
+            last_name: last_name,
+            // email: email,
+            username: username,
+            password: password,
+        })
+            .then((response) => {
+                console.log(response);
+                authenticate(username, password);
+                navigation.reset({ index: 0, routes: [{ name: 'AppPage' }], })
+            }, (error) => {
+                console.log(error);
+            });
+    }
+
     return (
-        <View style={[styles.container, { backgroundColor: theme.colors.elevation.level3 }]}>
-            <Image
-                style={styles.logo}
-                source={{uri: logoSource}}
-            />
-            <Text variant='headlineMedium'>Create Account</Text>
-            <TextInput
-                style={styles.input}
-                outlineStyle={{ borderRadius: 20 }}
-                mode='outlined'
-                placeholder='First name'
-                value={first_name}
-                onChangeText={first_name => setFirstName(first_name)}
-            />
-            <TextInput
-                style={styles.input}
-                outlineStyle={{ borderRadius: 20 }}
-                mode='outlined'
-                placeholder='Last name'
-                value={last_name}
-                onChangeText={last_name => setLastName(last_name)}
-            />
-            <TextInput
-                style={styles.input}
-                outlineStyle={{ borderRadius: 20 }}
-                mode='outlined'
-                placeholder='Email'
-                value={email}
-                onChangeText={email => setEmail(email)}
-                keyboardType='email-address'
-                autoCapitalize='none'
-            />
-            <TextInput
-                style={styles.input}
-                outlineStyle={{ borderRadius: 20 }}
-                mode='outlined'
-                placeholder='Password'
-                value={password}
-                onChangeText={password => setPassword(password)}
-                secureTextEntry={true}
-                autoCapitalize='none'
-            />
-            <Button uppercase='true' labelStyle={styles.buttonLabel} style={styles.button} mode="contained" onPress={() => navigation.navigate('LandingPage')}>
-                Sign up
-            </Button>
-            <Text>
-                Already have an account? <Text style={{color: theme.colors.primary}} onPress={() => navigation.navigate('LoginPage')}>Login</Text>
-            </Text>
-        </View>
+        <ScrollView style={{ flex: 1, backgroundColor: theme.colors.elevation.level3 }}>
+            <View style={[styles.container, { backgroundColor: theme.colors.elevation.level3 }]}>
+                <Image
+                    style={styles.logo}
+                    source={{ uri: logoSource }}
+                />
+                <Text variant='headlineMedium'>Create Account</Text>
+                <TextInput
+                    style={styles.input}
+                    outlineStyle={{ borderRadius: 20 }}
+                    mode='outlined'
+                    placeholder='First name'
+                    value={first_name}
+                    onChangeText={first_name => setFirstName(first_name)}
+                />
+                <TextInput
+                    style={styles.input}
+                    outlineStyle={{ borderRadius: 20 }}
+                    mode='outlined'
+                    placeholder='Last name'
+                    value={last_name}
+                    onChangeText={last_name => setLastName(last_name)}
+                />
+                <TextInput
+                    style={styles.input}
+                    outlineStyle={{ borderRadius: 20 }}
+                    mode='outlined'
+                    placeholder='Username'
+                    value={username}
+                    onChangeText={username => setUsername(username)}
+                    autoCapitalize='none'
+                />
+                {/* <TextInput
+                    style={styles.input}
+                    outlineStyle={{ borderRadius: 20 }}
+                    mode='outlined'
+                    placeholder='Email'
+                    value={email}
+                    onChangeText={email => setEmail(email)}
+                    keyboardType='email-address'
+                    autoCapitalize='none'
+                /> */}
+                <TextInput
+                    style={styles.input}
+                    outlineStyle={{ borderRadius: 20 }}
+                    mode='outlined'
+                    placeholder='Password'
+                    value={password}
+                    onChangeText={password => setPassword(password)}
+                    secureTextEntry={true}
+                    autoCapitalize='none'
+                />
+                <Button uppercase='true' labelStyle={styles.buttonLabel} style={styles.button} mode="contained" onPress={register}>
+                    Sign up
+                </Button>
+                <Text>
+                    Already have an account? <Text style={{ color: theme.colors.primary }} onPress={() => navigation.navigate('LoginPage')}>Login</Text>
+                </Text>
+            </View>
+        </ScrollView>
     );
 }
 
@@ -77,6 +131,7 @@ const styles = StyleSheet.create({
         height: '100%',
         gap: 25,
         padding: 20,
+        marginVertical: 40,
     },
     header: {
         textAlign: 'left',
@@ -100,4 +155,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default LoginPage;
+export default SignupPage;

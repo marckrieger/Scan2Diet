@@ -9,7 +9,7 @@ const HistoryPage = ({ navigation }) => {
 
     return (
         <View style={{ flex: 1, }}>
-            <Header title='Your scans' />
+            <Header title='Your scans' navigation={navigation} />
             <ScrollView style={styles.container}>
             </ScrollView>
         </View>

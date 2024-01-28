@@ -74,7 +74,7 @@ const OverviewPage = ({ navigation }) => {
 
     return (
         <View style={{ flex: 1, }}>
-            <Header title='Overview' />
+            <Header title='Overview' navigation={navigation} />
             <ScrollView style={{ flex: 1, }}>
                 <View style={styles.container}>
                     <View style={[styles.item, { backgroundColor: theme.colors.elevation.level1, borderColor: theme.colors.primary }]}>
