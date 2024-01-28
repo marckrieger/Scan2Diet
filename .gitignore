@@ -2,3 +2,4 @@ node_modules
 .venv
 brand
 .vscode
+user_uploads
