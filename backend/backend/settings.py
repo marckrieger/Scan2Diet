@@ -44,8 +44,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
-    'scan_receipt',
-    'retrieve_products',
     'api.apps.ApiConfig',
 ]
 
