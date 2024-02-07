@@ -189,7 +189,6 @@ const App = () => {
 
   function getInitialRouteName() {
     const token = SecureStore.getItem('token');
-    console.log(token);
     return token===undefined ? 'LandingPage' : 'AppPage';
   }
 

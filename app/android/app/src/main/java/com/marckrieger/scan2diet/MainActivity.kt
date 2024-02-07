@@ -1,4 +1,4 @@
-package com.marckrieger.receipt2health
+package com.marckrieger.scan2diet
 
 import android.os.Build
 import android.os.Bundle

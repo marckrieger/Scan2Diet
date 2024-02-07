@@ -9,14 +9,14 @@ const LandingPage = ({ navigation }) => {
     const colorScheme = useColorScheme();
     const logoSource =
         colorScheme === 'dark'
-            ? 'http://192.168.178.21:8000/static/img/logo_dark.png'
-            : 'http://192.168.178.21:8000/static/img/logo_light.png';
+            ? require('../../assets/img/logo_dark.png')
+            : require('../../assets/img/logo_light.png');
 
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.elevation.level3 }]}>
             <Image
                 style={styles.logo}
-                source={{ uri: logoSource }}
+                source={logoSource}
             />
             <Text variant='headlineLarge' style={[styles.header, { color: theme.colors.primary }]}>Scan2Diet</Text>
             <Text variant='titleMedium' style={styles.subheader}>Track your nutritional values by scanning your grocery receipts.</Text>
@@ -51,11 +51,12 @@ const styles = StyleSheet.create({
     button: {
         width: '100%',
         borderRadius: 20,
-        height: 60,
-        justifyContent: 'center',
+        justifyItems: 'center',
     },
     buttonLabel: {
         fontSize: 16,
+        height: 30,
+        marginTop: 19,
     },
 })
 

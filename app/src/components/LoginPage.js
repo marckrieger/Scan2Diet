@@ -12,14 +12,14 @@ const LoginPage = ({ navigation }) => {
     async function authenticate(username, password) {
 
         try {
-            const loginResponse = await axios.post('http://192.168.178.21:8000/api/user_login/', {
+            const loginResponse = await axios.post('https://api.scan2diet.com/user_login/', {
                 username,
                 password,
             });
 
             console.log('Response: ' + loginResponse.data);
 
-            const tokenResponse = await axios.post('http://192.168.178.21:8000/api/obtain_token/', {
+            const tokenResponse = await axios.post('https://api.scan2diet.com/obtain_token/', {
                 username,
                 password,
             });
@@ -28,7 +28,7 @@ const LoginPage = ({ navigation }) => {
 
             navigation.reset({ index: 0, routes: [{ name: 'AppPage' }], });
         } catch (error) {
-                console.log(error.message);
+            console.log(error.message);
         }
     }
 
@@ -37,14 +37,14 @@ const LoginPage = ({ navigation }) => {
     const colorScheme = useColorScheme();
     const logoSource =
         colorScheme === 'dark'
-            ? 'http://192.168.178.21:8000/static/img/logo_dark.png'
-            : 'http://192.168.178.21:8000/static/img/logo_light.png';
+            ? require('../../assets/img/logo_dark.png')
+            : require('../../assets/img/logo_light.png');
 
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.elevation.level3 }]}>
             <Image
                 style={styles.logo}
-                source={{ uri: logoSource }}
+                source={logoSource}
             />
             <Text variant='headlineMedium'>Welcome back.</Text>
             <TextInput
@@ -69,7 +69,7 @@ const LoginPage = ({ navigation }) => {
             <Text style={{ textAlign: 'right', width: '100%' }}>
                 Forgot your password?
             </Text>
-            <Button uppercase='true' labelStyle={styles.buttonLabel} style={styles.button} mode="contained" onPress={()=>authenticate(username, password)}>
+            <Button uppercase='true' labelStyle={styles.buttonLabel} style={styles.button} mode="contained" onPress={() => authenticate(username, password)}>
                 Login
             </Button>
             <Text>
@@ -98,12 +98,12 @@ const styles = StyleSheet.create({
     button: {
         width: '100%',
         borderRadius: 20,
-        marginTop: 20,
-        height: 60,
-        justifyContent: 'center',
+        justifyItems: 'center',
     },
     buttonLabel: {
         fontSize: 16,
+        height: 30,
+        marginTop: 19,
     },
 })
 

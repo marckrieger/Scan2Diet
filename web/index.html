@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan2Diet</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- load outfit font google -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="script.js"></script>
+    <link rel="shortcut icon" href="static/favicon/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <img src="static/img/logo.png" alt="Scan2Diet" class="landing-logo">
+        <h1>Scan2Diet</h1>
+        <p>Track the nutritional values of the food that you consume by scanning your grocery receipts.</p>
+        <button onclick="scrollVH()">
+            Discover more
+            <span class="material-symbols-outlined">
+                expand_more
+            </span>
+        </button>
+    </header>
+    <main>
+        <nav class="container">
+            <a href="./" class="logo">
+                <img src="static/img/logo.png" alt="Scan2Diet">
+                <h1>Scan2Diet</h1>
+            </a>
+            <ul>
+                <li><a href="#intro">Intro</a></li>
+                <li><a href="#screenshots">Screenshots</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <button class="menu" onclick="unfoldMobileNav()">
+                <span class="material-symbols-outlined">
+                    menu
+                </span>
+            </button>
+        </nav>
+        <nav id="mobile-nav">
+            <ul>
+                <li><a href="#intro">Intro</a></li>
+                <li><a href="#screenshots">Screenshots</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+        <section id="intro">
+            <h2>Introduction</h2>
+            <p>
+                <strong>Scan2Diet</strong> is a mobile application that allows users to track the nutritional values of
+                the food that
+                they
+                consume by scanning their grocery receipts. The application uses Optical Character Recognition (OCR) to
+                extract the text from the grocery receipts and then uses the extracted text to search for the
+                nutritional
+                values of the food items in a database.
+            </p>
+            <p>
+                The app aims to be as simple as possible and to make the process of tracking the users' nutriotional
+                habits
+                as easy and as fast as possible. That's why the primary feature of the app is the ability to scan the
+                grocery receipts and to automatically create a list of the food items that the user has purchased.
+            </p>
+            <p>
+                Please note that the app is still in development and that it does not yet work as intended. The app is
+                currently
+                only usable for experimenting purposes and is not yet ready for public use.
+            </p>
+            <!-- <h1>Scan2Diet</h1> -->
+            <button class="download-apk">
+                <a href="static/apk/scan2diet.apk" download="scan2diet.apk" class="download">
+                    <span class="material-symbols-outlined">
+                        apk_install
+                    </span>
+                    Download APK
+                </a>
+            </button>
+        </section>
+        <hr>
+        <section id="screenshots">
+            <h2>Screenshots</h2>
+            <h3>Light mode</h3>
+            <div class="screenshots">
+                <img src="static/img/screenshot_light_1.png" alt="Screenshot 1" class="screenshot">
+                <img src="static/img/screenshot_light_2.png" alt="Screenshot 2" class="screenshot">
+                <img src="static/img/screenshot_light_3.png" alt="Screenshot 3" class="screenshot">
+                <img src="static/img/screenshot_light_4.png" alt="Screenshot 4" class="screenshot">
+                <img src="static/img/screenshot_light_5.png" alt="Screenshot 5" class="screenshot">
+                <img src="static/img/screenshot_light_6.png" alt="Screenshot 6" class="screenshot">
+                <img src="static/img/screenshot_light_7.png" alt="Screenshot 7" class="screenshot">
+            </div>
+            <h3>Dark mode</h3>
+            <div class="screenshots">
+                <img src="static/img/screenshot_dark_1.png" alt="Screenshot 1" class="screenshot">
+                <img src="static/img/screenshot_dark_2.png" alt="Screenshot 2" class="screenshot">
+                <img src="static/img/screenshot_dark_3.png" alt="Screenshot 3" class="screenshot">
+                <img src="static/img/screenshot_dark_4.png" alt="Screenshot 4" class="screenshot">
+                <img src="static/img/screenshot_dark_5.png" alt="Screenshot 5" class="screenshot">
+                <img src="static/img/screenshot_dark_6.png" alt="Screenshot 6" class="screenshot">
+                <img src="static/img/screenshot_dark_7.png" alt="Screenshot 7" class="screenshot">
+            </div>
+        </section>
+        <hr>
+        <section id="about">
+            <h2>About</h2>
+            <p>
+                Developed by Marc Krieger.
+            </p>
+            <h3>Technologies used</h3>
+            <p>
+                <a target="_blank" href="https://reactnative.dev/">React Native</a>,
+                <a target="_blank" href="https://expo.io/">Expo</a>,
+                <a target="_blank" href="https://callstack.github.io/react-native-paper/">React Native Paper</a>,
+                <a target="_blank" href="https://reactnavigation.org/">React Navigation</a>,
+                <a target="_blank" href="https://www.djangoproject.com/">Django</a>,
+                <a target="_blank" href="https://www.django-rest-framework.org/">Django REST Framework</a>,
+                <a target="_blank" href="https://azure.microsoft.com/en-us/services/cognitive-services/computer-vision/">
+                    Azure Vision
+                </a>,
+                <a target="_blank" href="https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/">
+                    Azure Text Analytics
+                </a>,
+                <a target="_blank" href="https://world.openfoodfacts.org/files/api-documentation.html">Open Food Facts API</a>
+            </p>
+            <!-- Place this tag where you want the button to render. -->
+            <!-- Place this tag where you want the button to render. -->
+            <a class="github-button" href="https://github.com/marckrieger/scan2diet"
+                data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star"
+                data-size="large" aria-label="Star marckrieger/scan2diet on GitHub">
+                Star
+            </a>
+            <!-- Place this tag where you want the button to render. -->
+            <a class="github-button" href="https://github.com/marckrieger"
+                data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large"
+                aria-label="Follow @marckrieger on GitHub">
+                Follow @marckrieger
+            </a>
+        </section>
+    </main>
+    <footer>
+        <ul>
+            <li>2024 Scan2Diet</li>
+            <li><a href="https://scan2diet.com">www.scan2diet.com</a></li>
+        </ul>
+    </footer>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+
+</html>

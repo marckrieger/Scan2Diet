@@ -20,8 +20,8 @@ const AppPage = ({ navigation }) => {
     const colorScheme = useColorScheme();
     const logoSource =
         colorScheme === 'dark'
-            ? 'http://192.168.178.21:8000/static/img/logo_dark.png'
-            : 'http://192.168.178.21:8000/static/img/logo_light.png';
+            ? 'https://api.scan2diet.com/static/img/logo_dark.png'
+            : 'https://api.scan2diet.com/static/img/logo_light.png';
 
     return (
         <Tab.Navigator initialRouteName={defaultPage}>

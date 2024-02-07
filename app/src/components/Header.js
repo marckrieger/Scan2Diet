@@ -10,7 +10,7 @@ export default function Header({ title, navigation }) {
 
     async function logout() {
         const token = SecureStore.getItem('token');
-        axios.post('http://192.168.178.21:8000/api/user_logout/', {}, {
+        axios.post('https://api.scan2diet.com/user_logout/', {}, {
             headers: {
                 Authorization: `Token ${token}`,
             },

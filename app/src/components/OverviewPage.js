@@ -21,7 +21,7 @@ const OverviewPage = ({ navigation }) => {
 
     const getItems = async () => {
         const token = await SecureStore.getItemAsync('token');
-        await axios.get('http://192.168.178.21:8000/api/get_nutritional_overview/', {
+        await axios.get('https://api.scan2diet.com/get_nutritional_overview/', {
             headers: {
                 Authorization: `Token ${token}`,
                 'Content-Type': 'application/json',

@@ -16,18 +16,18 @@ const SignupPage = ({ navigation }) => {
     const colorScheme = useColorScheme();
     const logoSource =
         colorScheme === 'dark'
-            ? 'http://192.168.178.21:8000/static/img/logo_dark.png'
-            : 'http://192.168.178.21:8000/static/img/logo_light.png';
+            ? require('../../assets/img/logo_dark.png')
+            : require('../../assets/img/logo_light.png');
 
 
     function authenticate(username, password) {
-        axios.post('http://192.168.178.21:8000/api/user_login/', {
+        axios.post('https://api.scan2diet.com/user_login/', {
             username: username,
             password: password,
         })
             .then((response) => {
                 console.log(response);
-                axios.post('http://192.168.178.21:8000/api/obtain_token/', {
+                axios.post('https://api.scan2diet.com/obtain_token/', {
                     username: username,
                     password: password,
                 })
@@ -43,7 +43,7 @@ const SignupPage = ({ navigation }) => {
     }
 
     function register() {
-        axios.post('http://192.168.178.21:8000/api/user_register/', {
+        axios.post('https://api.scan2diet.com/user_register/', {
             first_name: first_name,
             last_name: last_name,
             // email: email,
@@ -64,7 +64,7 @@ const SignupPage = ({ navigation }) => {
             <View style={[styles.container, { backgroundColor: theme.colors.elevation.level3 }]}>
                 <Image
                     style={styles.logo}
-                    source={{ uri: logoSource }}
+                    source={logoSource}
                 />
                 <Text variant='headlineMedium'>Create Account</Text>
                 <TextInput
@@ -146,12 +146,12 @@ const styles = StyleSheet.create({
     button: {
         width: '100%',
         borderRadius: 20,
-        marginTop: 20,
-        height: 60,
-        justifyContent: 'center',
+        justifyItems: 'center',
     },
     buttonLabel: {
         fontSize: 16,
+        height: 30,
+        marginTop: 19,
     },
 })
 

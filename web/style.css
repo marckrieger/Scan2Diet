@@ -1,0 +1,264 @@
+:root {
+    --primary: #355e4f;
+    --background: #e1f1ec;
+    --background-2: #8db9a8;
+    --on-primary: #113729;
+    --on-primary-container: #2a5244;
+    --primary-semi: #355e4f40;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--background);
+    color: var(--primary);
+}
+
+.container {
+    padding: 0 2em;
+}
+
+strong {
+    font-weight: 600;
+}
+
+button {
+    font-family: 'Outfit', sans-serif;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.2em;
+    margin: 1em 0;
+}
+
+header {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    background: linear-gradient(var(--background), var(--background-2));
+    padding: 2em;
+}
+header .landing-logo {
+    width: 8em;
+}
+header h1 {
+    font-size: 3.5em;
+    color: var(--primary);
+    cursor: default;
+}
+header p {
+    text-align: center;
+}
+header button {
+    position: absolute;
+    top: calc(100% - 100px);
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    color: var(--primary);
+    font-size: 1em;
+    flex-direction: column;
+    text-align: center;
+    gap: 5px;
+    transition: gap 0.3s;
+    cursor: pointer;
+    font-weight: 600;
+}
+header button:hover {
+    gap: 15px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary);
+    height: 4em;
+    gap: 10px;
+    position: sticky;
+    top: 0;
+    border-bottom: solid 1px var(--background-2);
+    box-shadow: 0 0 10px var(--primary-semi);
+}
+nav > ul {
+    display: flex;
+    justify-content: start;
+    gap: 1em;
+}
+nav > ul > li {
+    list-style: none;
+}
+nav > ul > li > a {
+    color: var(--background);
+    text-decoration: none;
+    padding: 0.6em;
+    border-radius: 0.5em;
+    transition: background-color 0.2s;
+}
+nav > ul > li > a:hover {
+    background-color: var(--on-primary-container);
+}
+nav > .logo > img {
+    height: 2.5em;
+}
+nav > .logo > h1 {
+    color: var(--background);
+    font-size: 1.5em;
+}
+nav > .logo {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    text-decoration: none;
+}
+#mobile-nav {
+    display: flex;
+    position: sticky;
+    top: 4em;
+    padding: 2em 2em;
+    height: auto;
+    max-height: 0em;
+    overflow: hidden;
+    padding: 0em 2em;
+    transition: max-height 0.2s, padding 0.2s;
+}
+#mobile-nav.unfolded {
+    max-height: 10em;
+    padding: 2em 2em;
+}
+#mobile-nav ul {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 1em;
+    box-shadow: 0 0 10px var(--primary-semi);
+}
+
+
+hr {
+    border: none;
+    border-top: solid 5px var(--primary-semi);
+}
+main {
+    min-height: 100vh;
+}
+section {
+    padding: 2em 2em;
+}
+section h2 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+section h3 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+button.download-apk {
+    border: 0;
+    /* background: linear-gradient(var(--background-2), var(--primary)); */
+    background-color: var(--primary);
+    border-radius: 0.5em;
+    margin: 2em 0;
+    transition: background-color 0.2s;
+}
+button.download-apk:hover {
+    /* background: linear-gradient(var(--background-2), var(--on-primary-container)); */
+    background-color: var(--on-primary-container);
+}
+button.download-apk a {
+    display: flex;
+    color: var(--background);
+    text-decoration: none;
+    padding: 1em 2em;
+    border-radius: 0.5em;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+}
+
+#screenshots .screenshots {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    overflow-x: scroll;
+    background-color: var(--primary);
+    border-radius: 1em;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+#screenshots .screenshots img {
+    width: 20em;
+    max-width: 300px;
+    border-radius: 0.5em;
+}
+#about p {
+    margin-bottom: 1em;
+}
+#about a {
+    color: var(--primary);
+}
+#about a:hover {
+    color: var(--on-primary);
+}
+footer {
+    padding: 1em 2em;
+    background-color: var(--primary);
+}
+footer ul {
+    display: flex;
+    gap: 2em;
+    justify-content: space-between;
+}
+footer li {
+    color: var(--background);
+    list-style: none;
+}
+footer a {
+    color: var(--background);
+    text-decoration: none;
+}
+nav > .menu {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    padding: 0.5em;
+    color: var(--background);
+    transition: background-color 0.2s;
+}
+nav > .menu:hover {
+    background-color: var(--on-primary-container);
+}
+nav > .menu > span {
+    font-size: 2.2em;
+}
+@media screen and (max-width: 700px) {
+    nav > ul {
+        display: none;
+    }
+    nav > .menu {
+        display: flex;
+    }
+}
+@media screen and (min-width: 700px) {
+    #mobile-nav {
+        display: none;
+    }
+}

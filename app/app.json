@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "app",
-    "slug": "app",
+    "name": "Scan2Diet",
+    "slug": "scan2diet",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#D9E8E1"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,8 +19,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#D9E8E1"
       },
       "package": "com.marckrieger.scan2diet",
       "permissions": [
@@ -52,8 +52,15 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "e562402c-21ce-4d1f-aff2-78c9e9078e9f"
+        "projectId": "abbf874c-9648-4d82-94e5-890fc339c025"
       }
+    },
+    "owner": "marckrieger",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/abbf874c-9648-4d82-94e5-890fc339c025"
     }
   }
 }

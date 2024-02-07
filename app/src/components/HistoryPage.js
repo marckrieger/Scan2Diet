@@ -15,7 +15,7 @@ const HistoryPage = ({ navigation }) => {
 
     function getItems() {
         const token = SecureStore.getItem('token');
-        axios.get('http://192.168.178.21:8000/api/get_items?attributes=scan_name,match_name,match_certainty', {
+        axios.get('https://api.scan2diet.com/get_items?attributes=scan_name,match_name,match_certainty', {
             headers: {
                 Authorization: `Token ${token}`,
             },
@@ -30,7 +30,7 @@ const HistoryPage = ({ navigation }) => {
 
     function deleteItem(id) {
         const token = SecureStore.getItem('token');
-        axios.post('http://192.168.178.21:8000/api/delete_item/',
+        axios.post('https://api.scan2diet.com/delete_item/',
             {
                 id: id,
             },

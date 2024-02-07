@@ -52,7 +52,7 @@ const ScanPage = ({ navigation }) => {
             formData.append('scan_mode', value);
 
             try {
-                const response = await axios.post('http://192.168.178.21:8000/api/upload/', formData, {
+                const response = await axios.post('https://api.scan2diet.com/upload/', formData, {
                     headers: {
                         Authorization: `Token ${token}`,
                         'Content-Type': 'multipart/form-data',
