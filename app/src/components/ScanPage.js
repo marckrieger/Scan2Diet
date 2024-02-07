@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, StyleSheet, TouchableHighlight, Animated } from 'react-native';
-import { useTheme, Text, SegmentedButtons, Button, IconButton, TouchableRipple, Snackbar } from 'react-native-paper';
+import { useTheme, Text, SegmentedButtons, Button, IconButton, TouchableRipple, Snackbar, ActivityIndicator } from 'react-native-paper';
 import { Camera, CameraType } from 'expo-camera';
 import { useIsFocused } from '@react-navigation/native';
 import Header from './Header';
@@ -20,6 +20,7 @@ const ScanPage = ({ navigation }) => {
 
     const [shutterColor, setShutterColor] = React.useState(theme.colors.secondary);
     const [disabled, setDisabled] = React.useState(false);
+    const [loading, setLoading] = React.useState('transparent');
 
     const cameraRef = useRef(null);
 
@@ -27,9 +28,16 @@ const ScanPage = ({ navigation }) => {
     const onToggleSnackBar = () => setVisible(!visible);
     const onDismissSnackBar = () => setVisible(false);
 
+    const [visibleProcessing, setVisibleProcessing] = React.useState(false);
+    const onToggleProcessing = () => setVisibleProcessing(!visibleProcessing);
+    const onDismissProcessing = () => setVisibleProcessing(false);
+
     const takePicture = async () => {
         setShutterColor('transparent');
         setDisabled(true);
+        setLoading(theme.colors.secondary);
+        onToggleProcessing();
+
         const token = await SecureStore.getItemAsync('token');
         if (cameraRef.current) {
             const options = { quality: 0.8 };
@@ -51,9 +59,11 @@ const ScanPage = ({ navigation }) => {
                     },
                 });
 
+                onDismissProcessing();
                 onToggleSnackBar();
                 setShutterColor(theme.colors.secondary);
                 setDisabled(false);
+                setLoading('transparent')
             } catch (error) {
                 console.error('Error uploading file:', error);
                 // Handle failure, e.g., show an error message to the user
@@ -99,7 +109,7 @@ const ScanPage = ({ navigation }) => {
                         buttons={[
                             {
                                 value: 'receipt',
-                                label: 'Receipt ᴮᴱᵀᴬ',
+                                label: 'Receipt ᴬᴸᴾᴴᴬ',
                             },
                             {
                                 value: 'product',
@@ -107,13 +117,13 @@ const ScanPage = ({ navigation }) => {
                             },
                             {
                                 value: 'dish',
-                                label: 'Dish ᴮᴱᵀᴬ',
+                                label: 'Dish ᴬᴸᴾᴴᴬ',
                             }
                         ]}
                     />
                     <View style={{ alignSelf: 'center', backgroundColor: 'transparent', borderColor: theme.colors.secondary, borderWidth: 5, width: 85, height: 85, borderRadius: 100, padding: 6, }}>
                         <TouchableHighlight activeOpacity={0.9} underlayColor='transparent' disabled={disabled} onPress={takePicture} style={{ backgroundColor: shutterColor, flex: 1, borderRadius: 100, overflow: 'hidden', }}>
-                            <View></View>
+                            <ActivityIndicator animating={true} color={loading} size={63} />
                         </TouchableHighlight>
                     </View>
                 </View>
@@ -128,7 +138,17 @@ const ScanPage = ({ navigation }) => {
                     },
                 }}
             >
-                Upload successful!
+                <Text style={{ color: theme.colors.background }}>
+                    Upload successful!
+                </Text>
+            </Snackbar>
+            <Snackbar
+                visible={visibleProcessing}
+                onDismiss={onDismissProcessing}
+            >
+                <Text style={{ color: theme.colors.background }}>
+                    Processing receipt...
+                </Text>
             </Snackbar>
         </View>
     );

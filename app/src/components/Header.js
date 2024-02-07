@@ -1,4 +1,4 @@
-import { Avatar } from 'react-native-paper';
+import { Avatar, IconButton } from 'react-native-paper';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useTheme, Text } from 'react-native-paper';
 import * as SecureStore from 'expo-secure-store';
@@ -18,19 +18,17 @@ export default function Header({ title, navigation }) {
             .then((response) => {
                 SecureStore.deleteItemAsync('token');
                 navigation.reset({ index: 0, routes: [{ name: 'LandingPage' }], });
-                console.log(response);
             })
             .catch((error) => {
                 console.log(error);
             });
     }
 
-    const userInitials = 'MK';
     return (
         <View style={[styles.header, { backgroundColor: theme.colors.elevation.level3 }]}>
             <Text variant='headlineSmall'>{title}</Text>
             <TouchableOpacity activeOpacity={0.5} onPress={logout}>
-                <Avatar.Text size={40} label={userInitials} />
+                <IconButton icon='logout' mode='contained' iconColor={theme.colors.primaryContainer} containerColor={theme.colors.primary} size={25} />
             </TouchableOpacity>
         </View>
     );
@@ -43,8 +41,8 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: 'baseline',
         paddingHorizontal: 20,
-        paddingVertical: 15,
+        paddingVertical: 8,
     }
 })

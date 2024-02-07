@@ -1,0 +1,44 @@
+Netto
+Marken-Discount
+24937 Flensburg, Holm 57 - 61
+WWW.NETTO-ONLINE.DE
+Odol Zahncreme 125ml
+EUR
+GL H-Milch 3,5% 1L VLOG
+1,55 A
+0.99 B
+Bananen Lose
+0,842 kg x
+0,84 B
+1,00 EUR/kg
+SUMME [3]
+3,38
+----
+------
+SUNME
+€
+3,38
+Kartenzahlung EUR
+3,38
+-K-U-N-D-E-N-B-E-L-E-G-
+Terminal-ID :
+65347608
+TA-Nr 623426
+BNr 6826
+Kartenzahlung
+Visa kontaktlos
+Visa Debit
+EUR 3,38
+PAN
+############1091
+Karte 0
+EMV-AID
+A0000000031010
+VU-Nr
+4556487980
+Genehmigungs-Nr
+549915
+Datum 20.01.24
+20:00 Uhr
+*** Zahlung erfolgt ***
+AS-Proc-Code = 00 075 00
