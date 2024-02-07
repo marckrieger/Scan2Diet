@@ -147,4 +147,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://192.168.178.21:3000",
     "http://192.168.178.21:8081",
+    "https://api.scan2diet.com",
 ]
