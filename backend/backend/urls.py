@@ -27,13 +27,13 @@ from api.delete_item.views import delete_item
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('api/user_login/', user_login, name='user_login'),
-    path('api/user_logout/', user_logout, name='user_logout'),
-    path('api/user_register/', user_register, name='user_register'),
-    path('api/get_csrf_token/', get_csrf_token, name='get_csrf_token'),
-    path('api/upload/', upload, name='upload'),
-    path('api/obtain_token/', views.obtain_auth_token),
-    path('api/get_items/', get_items, name='api_get_items'),
-    path('api/get_nutritional_overview/', get_nutritional_overview, name='api_get_nutritional_overview'),
-    path('api/delete_item/', delete_item, name='api_delete_item'),
+    path('user_login/', user_login, name='user_login'),
+    path('user_logout/', user_logout, name='user_logout'),
+    path('user_register/', user_register, name='user_register'),
+    path('get_csrf_token/', get_csrf_token, name='get_csrf_token'),
+    path('upload/', upload, name='upload'),
+    path('obtain_token/', views.obtain_auth_token),
+    path('get_items/', get_items, name='api_get_items'),
+    path('get_nutritional_overview/', get_nutritional_overview, name='api_get_nutritional_overview'),
+    path('delete_item/', delete_item, name='api_delete_item'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
