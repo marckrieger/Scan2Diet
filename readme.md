@@ -33,7 +33,6 @@ Please note that the app is still in development and that it does not yet work a
 </p>
 
 # About
-Developed by Marc Krieger.
 
 ## Technologies used
 - [React Native](https://reactnative.dev/)
