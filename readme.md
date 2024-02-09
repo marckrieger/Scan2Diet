@@ -1,4 +1,4 @@
-<img src="https://scan2diet.com/static/img/logo.png" alt="Scan2Diet Logo" width="200"/>
+<img src="https://scan2diet.com/static/img/logo.png" alt="Scan2Diet Logo" width="150"/>
 
 # Introduction
 
