@@ -1,3 +1,5 @@
+https://scan2diet.com/static/img/logo.png
+
 # Introduction
 
 Scan2Diet is a mobile application that allows users to track the nutritional values of the food that they consume by scanning their grocery receipts. The application uses Optical Character Recognition (OCR) to extract the text from the grocery receipts and then uses the extracted text to search for the nutritional values of the food items in a database.
