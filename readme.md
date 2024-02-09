@@ -1,4 +1,4 @@
-https://scan2diet.com/static/img/logo.png
+![Scan2Diet](https://scan2diet.com/static/img/logo.png)
 
 # Introduction
 
