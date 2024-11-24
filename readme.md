@@ -1,3 +1,7 @@
+<em>Currently on pause, have like a 1000 things about it that I want to improve, looking forward to having free time again and polishing this project!</em>
+
+---
+
 <img src="https://scan2diet.com/static/img/logo.png" alt="Scan2Diet Logo" width="150"/>
 
 # Introduction
